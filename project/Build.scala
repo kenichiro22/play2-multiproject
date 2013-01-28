@@ -7,15 +7,20 @@ object ApplicationBuild extends Build {
   val appName         = "multiproj"
   val appVersion      = "1.0-SNAPSHOT"
 
-  val appDependencies = Seq(
+  val adminDeps = Seq(
     // Add your project dependencies here,
     jdbc,
     anorm
   )
+  
+  val mainDeps = Seq()
 
+  // admin module
+  lazy val admin = play.Project(appName + "-admin", appVersion, adminDeps, path = file("modules/admin"))
 
-  val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here      
-  )
+  // main module
+  lazy  val main = play.Project(appName, appVersion, mainDeps).settings(
+      // Add your own project settings here      
+    ).dependsOn(admin).aggregate(admin)
 
 }

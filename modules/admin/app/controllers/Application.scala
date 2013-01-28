@@ -1,4 +1,4 @@
-package controllers
+package controllers.admin
 
 import play.api._
 import play.api.mvc._
@@ -6,7 +6,8 @@ import play.api.mvc._
 object Application extends Controller {
   
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    // Change view package
+    Ok(views.html.admin.index("Admin application is ready."))
   }
   
 }
