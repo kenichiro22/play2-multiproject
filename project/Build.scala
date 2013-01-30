@@ -14,6 +14,8 @@ object ApplicationBuild extends Build {
   )
   
   val mainDeps = Seq()
+  
+  val common = Project(appName + "-common", file("modules/common"))
 
   // admin module
   lazy val admin = play.Project(appName + "-admin", appVersion, adminDeps, path = file("modules/admin"))
@@ -21,6 +23,6 @@ object ApplicationBuild extends Build {
   // main module
   lazy  val main = play.Project(appName, appVersion, mainDeps).settings(
       // Add your own project settings here      
-    ).dependsOn(admin).aggregate(admin)
+    ).dependsOn(admin, common).aggregate(admin, common)
 
 }
